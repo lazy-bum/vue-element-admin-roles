@@ -9,18 +9,18 @@ import Layout from '@/layout'
 export function filterAsyncRoutes(routes, roles) {
   const res = []
   routes.forEach(route => {
-    const tmp = { ...route }
-    if (typeof tmp.component === 'string') {
-      if (tmp.component === 'Layout') {
-        tmp.component = Layout
+    const routeObj = { ...route }
+    if (typeof routeObj.component === 'string') {
+      if (routeObj.component === 'Layout') {
+        routeObj.component = Layout
       } else {
-        tmp.component = () => import(`@/views/${tmp.component}.vue`)
+        routeObj.component = () => import(`@/views/${route.component}`)
       }
     }
-    if (tmp.children) {
-      tmp.children = filterAsyncRoutes(tmp.children, roles)
+    if (routeObj.children) {
+      routeObj.children = filterAsyncRoutes(routeObj.children, roles)
     }
-    res.push(tmp)
+    res.push(routeObj)
   })
 
   return res
@@ -42,7 +42,6 @@ const actions = {
   generateRoutes({ commit }, { roles, menu }) {
     return new Promise(resolve => {
       const accessedRoutes = filterAsyncRoutes(menu, roles)
-      console.log(accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

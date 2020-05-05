@@ -27,7 +27,7 @@ const users = {
         children: [
           {
             path: 'menu1',
-            component: 'nested/menu1/index', // Parent router-view
+            component: 'nested/menu1', // Parent router-view
             name: 'Menu1',
             meta: { title: 'Menu1' },
             children: [
@@ -67,7 +67,7 @@ const users = {
           },
           {
             path: 'menu2',
-            component: 'nested/menu2/index',
+            component: 'nested/menu2',
             meta: { title: 'menu2' }
           }
         ]
@@ -89,7 +89,7 @@ const users = {
           {
             path: 'index',
             name: 'Form',
-            component: 'form/index',
+            component: 'form',
             meta: { title: 'Form', icon: 'form' }
           }
         ]
